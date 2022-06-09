@@ -1,11 +1,11 @@
 import GeneralLayout from "../components/layout/GeneralLayout";
 
-function HomePage() {
+function SettingsPage() {
     return (
         <GeneralLayout >
-            <h2>Home Page</h2>
+            <h2>Settings Page</h2>
         </ GeneralLayout>
     );
 }
 
-export default HomePage;
+export default SettingsPage;

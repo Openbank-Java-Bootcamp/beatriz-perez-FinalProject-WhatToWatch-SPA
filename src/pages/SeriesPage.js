@@ -1,11 +1,11 @@
 import GeneralLayout from "../components/layout/GeneralLayout";
 
-function HomePage() {
+function SeriesPage() {
     return (
         <GeneralLayout >
-            <h2>Home Page</h2>
+            <h2>Series Page</h2>
         </ GeneralLayout>
     );
 }
 
-export default HomePage;
+export default SeriesPage;
