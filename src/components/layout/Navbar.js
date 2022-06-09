@@ -12,7 +12,7 @@ function Navbar() {
         <nav className={styles.navbar}>
             <div className={styles.user}>
                 <Link to="/account">
-                    <img className={styles.user__image} src={user.imageUrl || defaultUser} alt="user pprofile"/>
+                    <img className={styles.user__image} src={user.imageUrl || defaultUser} alt="user profile"/>
                 </Link>
             </div>
 
