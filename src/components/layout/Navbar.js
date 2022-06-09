@@ -19,7 +19,7 @@ function Navbar() {
             <ul className={styles.navigation}>
                 <li>
                     <Link to="/home">
-                        <svg className={styles.icon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <svg className={[styles.icon, styles["icon--growing"]].join(" ")} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                             <polyline points="5 12 3 12 12 3 21 12 19 12" />
                             <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
                         </svg>
@@ -27,7 +27,7 @@ function Navbar() {
                 </li>
                 <li>
                     <Link to="/movies">
-                        <svg className={styles.icon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <svg className={[styles.icon, styles["icon--growing"]].join(" ")} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                             <rect x="4" y="4" width="16" height="16" rx="2" />
                             <line x1="8" y1="4" x2="8" y2="20" />
                             <line x1="16" y1="4" x2="16" y2="20" />
@@ -41,7 +41,7 @@ function Navbar() {
                 </li>
                 <li>
                     <Link to="/series">
-                        <svg className={styles.icon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <svg className={[styles.icon, styles["icon--growing"]].join(" ")} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                             <rect x="3" y="7" width="18" height="13" rx="2" />
                             <polyline points="16 3 12 7 8 3" />
                         </svg>
@@ -49,7 +49,7 @@ function Navbar() {
                 </li>
                 <li>
                     <Link to="/watchlists">
-                        <svg className={styles.icon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <svg className={[styles.icon, styles["icon--growing"]].join(" ")} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                             <line x1="9" y1="6" x2="20" y2="6" />
                             <line x1="9" y1="12" x2="20" y2="12" />
                             <line x1="9" y1="18" x2="20" y2="18" />
@@ -61,7 +61,7 @@ function Navbar() {
                 </li>
                 <li>
                     <Link to="/users">
-                        <svg className={styles.icon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <svg className={[styles.icon, styles["icon--growing"]].join(" ")} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                             <circle cx="12" cy="7" r="4" />
                             <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
                         </svg>
@@ -69,7 +69,7 @@ function Navbar() {
                 </li>
                 <li>
                     <Link to="/explore">
-                        <svg className={styles.icon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <svg className={[styles.icon, styles["icon--growing"]].join(" ")} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                             <line x1="9" y1="12" x2="15" y2="12" />
                             <line x1="12" y1="9" x2="12" y2="15" />
                             <circle cx="12" cy="12" r="8" />

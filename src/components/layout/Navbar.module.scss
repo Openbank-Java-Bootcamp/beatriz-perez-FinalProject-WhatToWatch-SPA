@@ -33,6 +33,11 @@
 
         &:hover {
             stroke: #647789;
+            transition: stroke 0.3s;
+        }
+    }
+    .icon--growing {
+        &:hover {
             width:45px;
             height:45px;
             transition: stroke 0.3s, width 0.3s, height 0.3s;
