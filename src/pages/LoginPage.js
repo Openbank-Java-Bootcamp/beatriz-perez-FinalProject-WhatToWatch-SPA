@@ -1,11 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
+import { SourceContext } from "../context/source.context";
 import { AuthContext } from "../context/auth.context";
 import axios from "axios";
 
-const API_URL = "http://localhost:5005";
-
 function LoginPage() {
+    const {API_URL} = useContext(SourceContext);
 
     // email, password
     const [email, setEmail] = useState("");

@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { SourceContext } from "../context/source.context";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const API_URL = "http://localhost:5005";
 
 function SignupPage() {
+  const {API_URL} = useContext(SourceContext);
 
-    // name, username, email, password
+  // name, username, email, password
     const [name, setName] = useState("");
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");

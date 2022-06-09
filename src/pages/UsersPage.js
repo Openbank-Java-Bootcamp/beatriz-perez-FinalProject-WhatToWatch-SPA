@@ -1,12 +1,12 @@
 import GeneralLayout from "../components/layout/GeneralLayout";
-import { useState, useEffect } from "react";
+import { SourceContext } from "../context/source.context";
+import { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import Banner from "../components/layout/Banner";
 import UsersList from "../components/content/UsersList";
 
-const API_URL = "http://localhost:5005";
-
 function UsersPage() {
+    const {API_URL} = useContext(SourceContext);
     const [users, setUsers] = useState([]);
 
     const getAllUsers = () => {
