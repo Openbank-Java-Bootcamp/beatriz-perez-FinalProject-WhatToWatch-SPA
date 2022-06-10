@@ -18,6 +18,7 @@ function WatchItemDetails({ item }) {
             synopsis: item.plot,
             imageUrl: item.image,
             rating: item.imDbRating,
+            genres: item.genreList.map(i => { return {name: i.value}})
         };
         console.log(requestBody)
 
