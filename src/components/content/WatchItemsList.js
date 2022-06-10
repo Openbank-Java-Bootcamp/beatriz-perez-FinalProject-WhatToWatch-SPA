@@ -37,12 +37,14 @@ function WatchItemsList({ list, listTitle, searchString }) {
         }
     };
     
-      useEffect(() => {
-        if(list) setItems(list);
-        else getAllItems() ;
-      }, []);
+    useEffect(() => {
+    if(list){
+        setItems(list);
+        setShowingItems([...list].slice(0, 5));
+    } else getAllItems() ;
+    }, []);
     
-
+    console.log(showingItems);
 
     return (
         <section className={styles.section} >

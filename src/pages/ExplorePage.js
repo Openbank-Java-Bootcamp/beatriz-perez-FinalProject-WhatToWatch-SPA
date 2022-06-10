@@ -2,6 +2,7 @@ import GeneralLayout from "../components/layout/GeneralLayout";
 import Banner from "../components/layout/Banner";
 import PaddingSection from "../components/layout/PaddingSection";
 import WatchItemsList from "../components/content/WatchItemsList";
+import Exploreform from "../components/content/ExploreForm";
 
 
 
@@ -14,6 +15,9 @@ function ExplorePage() {
                 text="Explore even more titles on IMDb and add them to your lists"
                 image="https://images.pexels.com/photos/2774566/pexels-photo-2774566.jpeg"
             />
+            <PaddingSection>
+                <Exploreform />
+            </PaddingSection>
             <PaddingSection>
                 <WatchItemsList 
                     listTitle="Most popular movies on IMDb"
