@@ -13,6 +13,7 @@ import MoviesPage from './pages/MoviesPage';
 import SeriesPage from './pages/SeriesPage';
 import UsersPage from './pages/UsersPage';
 import SettingsPage from './pages/SettingsPage';
+import WatchItemPage from './pages/WatchItemPage';
 
 
 
@@ -27,15 +28,17 @@ function App() {
 
         {/* --- Only for logged in users: --- */}
         <Route path="/account" element={<IsPrivate><AccountPage /></IsPrivate>} />
+        <Route path="/users" element={<IsPrivate><UsersPage /></IsPrivate>} />
+        <Route path="/settings" element={<IsPrivate><SettingsPage /></IsPrivate>} />
+
         <Route path="/home" element={<IsPrivate><HomePage /></IsPrivate>} />
+        <Route path="/watchlists" element={<IsPrivate><WatchListsPage /></IsPrivate>} />
+        <Route path="/explore" element={<IsPrivate><ExplorePage /></IsPrivate>} />
         <Route path="/movies" element={<IsPrivate><MoviesPage /></IsPrivate>} />
         <Route path="/series" element={<IsPrivate><SeriesPage /></IsPrivate>} />
-        <Route path="/watchlists" element={<IsPrivate><WatchListsPage /></IsPrivate>} />
-        <Route path="/users" element={<IsPrivate><UsersPage /></IsPrivate>} />
-        <Route path="/explore" element={<IsPrivate><ExplorePage /></IsPrivate>} />
-        <Route path="/settings" element={<IsPrivate><SettingsPage /></IsPrivate>} />
+        <Route path="/title/:id" element={<IsPrivate><WatchItemPage /></IsPrivate>} />
+
         {/* 
-        --> watchItem 
         --> user
         */}
       </Routes>

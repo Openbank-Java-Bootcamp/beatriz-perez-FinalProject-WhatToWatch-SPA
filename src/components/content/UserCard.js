@@ -2,9 +2,6 @@ import defaultUser from "../../images/default-user-image.png";
 import styles from "./UserCard.module.scss";
 
 function UserCard({ user }) {
-
-    console.log(user);
-
     return (
         <article className={styles.card}>
             <h2 className={styles.card__username} >{user.username}</h2>
