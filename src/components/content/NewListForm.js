@@ -32,7 +32,8 @@ function NewListForm() {
           headers: { Authorization: `Bearer ${storedToken}` },
         })
         .then((response) => {
-          console.log(response);
+          console.log(response.data);
+          console.log(response.data.id);
         })
         .catch((error) => console.log(error));        
     }
