@@ -7,8 +7,9 @@ import axios from "axios";
 // Components:
 import GeneralLayout from "../../components/layout/GeneralLayout";
 import Banner from "../../components/layout/Banner";
-import AddWatchItemToList from "../../components/action/AddWatchItemToList";
 import ExploreList from "../../components/content/explore/ExploreList";
+import AddItemToList from "../../components/content/watchItem/AddItemToList";
+import PaddingSection from "../../components/layout/PaddingSection";
 
 function WatchItemPage() {
 
@@ -39,16 +40,22 @@ function WatchItemPage() {
                         text={`${item.type} ${item.year} · ${item.genres.map(i => i.name).join(" · ")}`}
                         image={item.banner}
                     />
-                    <AddWatchItemToList item={item} />
-                    <div>
-                        <p>{`id: ${item.id}`}</p>
-                        <p>{`creationDate: ${item.creationDate}`}</p>
-                        <p>{`imdbId: ${item.imdbId}`}</p>
-                        <p>{`rating: ${item.rating}`}</p>
-                        <p>{`title: ${item.title}`}</p>
-                        <p>{`synopsis: ${item.synopsis}`}</p>
-                    </div>
-                    <ExploreList listTitle="Similar titles" list={item.similars}  />
+                    <PaddingSection>
+                        <AddItemToList  item={item} />
+                    </PaddingSection>
+                    <PaddingSection>
+                        <div>
+                            <p>{`id: ${item.id}`}</p>
+                            <p>{`creationDate: ${item.creationDate}`}</p>
+                            <p>{`imdbId: ${item.imdbId}`}</p>
+                            <p>{`rating: ${item.rating}`}</p>
+                            <p>{`title: ${item.title}`}</p>
+                            <p>{`synopsis: ${item.synopsis}`}</p>
+                        </div>
+                    </PaddingSection>
+                    <PaddingSection>
+                        <ExploreList listTitle="Similar titles" list={item.similars}  />
+                    </PaddingSection>
                 </>
             ):(
                 <p>Loading...</p>
