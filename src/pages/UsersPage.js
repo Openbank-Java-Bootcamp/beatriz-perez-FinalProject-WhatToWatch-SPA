@@ -1,9 +1,14 @@
-import GeneralLayout from "../components/layout/GeneralLayout";
+// Modules:
 import { SourceContext } from "../context/source.context";
 import { useContext, useState, useEffect } from "react";
 import axios from "axios";
+
+// Components:
+import GeneralLayout from "../components/layout/GeneralLayout";
 import Banner from "../components/layout/Banner";
-import UsersList from "../components/content/UsersList";
+import PaddingSection from "../components/layout/PaddingSection";
+import UsersList from "../components/content/user/UsersList";
+import FindUserForm from "../components/content/user/FindUserForm";
 
 function UsersPage() {
   const {API_URL} = useContext(SourceContext);
@@ -38,6 +43,14 @@ function UsersPage() {
             title="Users" 
             text="Check out other user's watchlists"
             image="https://images.pexels.com/photos/2774566/pexels-photo-2774566.jpeg"
+        />
+        <PaddingSection>
+          <FindUserForm />
+        </PaddingSection>
+        <UsersList 
+            listTitle="Users you follow" 
+            usersList={users} 
+            orderFunction={(a,b) => new Date(b.joinDate) - new Date(a.joinDate)}
         />
         <UsersList 
             listTitle="Newest users" 

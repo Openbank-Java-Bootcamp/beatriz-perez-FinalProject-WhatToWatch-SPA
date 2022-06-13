@@ -1,4 +1,7 @@
+// Images:
 import defaultUser from "../../images/default-user-image.png";
+
+// Styles:
 import styles from "./UserCard.module.scss";
 
 function UserCard({ user }) {

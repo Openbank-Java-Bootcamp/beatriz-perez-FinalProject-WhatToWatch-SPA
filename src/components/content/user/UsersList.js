@@ -1,9 +1,17 @@
+// Modules:
 import { Link } from "react-router-dom";
-import Usercard from "./UserCard";
+
+// Styles:
 import styles from "./UsersList.module.scss";
+
+// Components:
+import Usercard from "../UserCard";
+import { useState } from "react";
 
 function UsersList({ listTitle, usersList, orderFunction }) {
 
+    const [allUsers, setAllUsers] = useState([]);
+    
     const users = usersList.sort(orderFunction);
     
 
