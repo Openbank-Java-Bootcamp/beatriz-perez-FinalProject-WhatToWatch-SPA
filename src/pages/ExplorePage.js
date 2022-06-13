@@ -1,8 +1,8 @@
 import GeneralLayout from "../components/layout/GeneralLayout";
 import Banner from "../components/layout/Banner";
 import PaddingSection from "../components/layout/PaddingSection";
-import WatchItemsList from "../components/content/WatchItemsList";
-import Exploreform from "../components/content/ExploreForm";
+import Exploreform from "../components/content/explore/ExploreForm";
+import ExploreRanking from "../components/content/explore/ExploreRanking";
 
 
 
@@ -19,19 +19,19 @@ function ExplorePage() {
                 <Exploreform />
             </PaddingSection>
             <PaddingSection>
-                <WatchItemsList 
+                <ExploreRanking 
                     listTitle="Most popular movies on IMDb"
                     searchString="MostPopularMovies"
                 />
-                <WatchItemsList 
+                <ExploreRanking 
                     listTitle="Most popular TV series on IMDb"
                     searchString="MostPopularTVs"
                 />
-                <WatchItemsList 
+                <ExploreRanking 
                     listTitle="Top rated movies on IMDb"
                     searchString="Top250Movies"
                 />
-                <WatchItemsList 
+                <ExploreRanking 
                     listTitle="Top rated TV series on IMDb"
                     searchString="Top250TVs"
                 />

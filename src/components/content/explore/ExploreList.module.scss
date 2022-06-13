@@ -1,0 +1,42 @@
+.section {
+    width: 100%;
+    button {
+        background-color: transparent;
+        border: none;
+        outline: none;
+        padding: 0;
+        cursor: pointer;
+    }
+}
+.title {
+    margin: 15px 0;
+}
+.icon {
+    margin-left: 5px;
+    margin-bottom: -3px;
+    width:18px;
+    height:18px;
+    stroke-width: 1.5px;
+    stroke: #2c3e50;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    &:hover {
+        stroke: #647789;
+        transition: stroke 0.3s;
+    }
+}
+.list {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap:15px;
+
+    & a {
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+    }
+}
