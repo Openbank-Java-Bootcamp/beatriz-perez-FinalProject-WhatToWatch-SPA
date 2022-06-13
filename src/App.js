@@ -17,7 +17,6 @@ import ExplorePage from './pages/ExplorePage';
 import SettingsPage from './pages/SettingsPage';
 
 import WatchItemPage from './pages/Detail/WatchItemPage';
-import ImdbItemPage from './pages/Detail/ImdbItemPage';
 
 
 
@@ -43,7 +42,6 @@ function App() {
         <Route path="/settings" element={<IsPrivate><SettingsPage /></IsPrivate>} />
 
         <Route path="/watchitem/:id" element={<IsPrivate><WatchItemPage /></IsPrivate>} />
-        <Route path="/imdbitem/:id" element={<IsPrivate><ImdbItemPage /></IsPrivate>} />
 
         {/* 
         --> user

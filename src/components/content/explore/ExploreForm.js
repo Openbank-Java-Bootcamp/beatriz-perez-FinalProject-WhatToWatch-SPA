@@ -8,6 +8,7 @@ function Exploreform() {
     const { externalContent_API_url, externalContent_API_key } = useContext(SourceContext);
     
     const [ searchText, setSearchText] = useState("");
+    const [ searching, setSearching] = useState(false);
     const [ searchResults, setSearchResults] = useState([]);
     
     // SEARCH TEXT:
@@ -16,14 +17,22 @@ function Exploreform() {
     // SEARCH RESULTS:
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios
-            // Call external IMDb API
-            .get(externalContent_API_url + "SearchTitle" + externalContent_API_key + "/"+ searchText)
-            // Save results in state variable
-            .then((response) => {setSearchResults(response.data.results);})
-            // Reset form input
-            .then(setSearchText(""))
-            .catch((error) => console.log(error));
+        if(searchText.length > 0) {
+            setSearching(true);
+            axios
+                // Call external IMDb API
+                .get(externalContent_API_url + "SearchTitle" + externalContent_API_key + "/"+ searchText)
+                // Save results in state variable
+                .then((response) => {
+                    setSearchResults(response.data.results);
+                    // Reset form input
+                    setSearchText("")
+                    setSearching(false);
+                })
+                .catch((error) => {
+                    console.log(error)
+                });
+        }
     };
 
     return (
@@ -43,9 +52,11 @@ function Exploreform() {
                     onChange={handleSearchText}
                 />
                 <button className={styles.form__button} type="submit">Search</button>
+                {searching && <p>loading...</p>}
             </form>
-            {searchResults.length > 0 && 
-                <ExploreList listTitle="Results for your search" list={searchResults} />
+            {
+                searchResults.length > 0 && 
+                    <ExploreList listTitle="Results for your search" list={searchResults} />
             }
         </>
     );
