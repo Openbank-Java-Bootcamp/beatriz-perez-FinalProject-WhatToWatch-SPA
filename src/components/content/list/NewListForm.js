@@ -41,6 +41,8 @@ function NewListForm({ handleCreated }) {
         .catch((error) => {
           console.log(error)
           setErrorMessage(error.response.data.message);
+          setListName("");
+          setListDescription("");
         });        
     }
 
