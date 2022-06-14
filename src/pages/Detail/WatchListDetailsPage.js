@@ -24,6 +24,7 @@ function WatchListDetailsPage() {
     const { id:listId } = useParams();
 
     const [isOwner, setIsOwner] = useState(false);
+    const [isFollower, setIsFollower] = useState(false);
     const [listName, setListName] = useState("")
     const [listDescription, setListDescription] = useState("")
     const [list, setList] = useState(null)
@@ -49,11 +50,28 @@ function WatchListDetailsPage() {
                 setList(response.data);
                 setListName(response.data.name);
                 setListDescription(response.data.description);
-                if(response.data.owner.id === user.id) setIsOwner(true)
-                else setIsOwner(false)
+                setIsOwner(response.data.owner.id === user.id);
+                setIsFollower(response.data.followers.filter(i => i.id === user.id).length > 0);
             })
             .catch((error) => console.log("ERROR MESSAGE: ", error.response.data.message));
     };
+
+    // Follow or unfollow list
+    const changeFollowing = () => {
+        setEditing(true);
+        const requestBody = { id: user.id, };
+        const storedToken = localStorage.getItem("authToken");
+        const url = isFollower 
+            ? `${API_URL}/api/lists/unfollow/${listId}`
+            : `${API_URL}/api/lists/follow/${listId}`
+        axios
+            .patch(url, requestBody, { headers: { Authorization: `Bearer ${storedToken}` }, })
+            .then((response) => {
+                console.log(response.data);
+                setEditing(false);
+            })
+            .catch((error) => console.log(error.response.data.message));
+    }
 
     // Edit list details
     const editListDetails = () => {
@@ -135,10 +153,9 @@ function WatchListDetailsPage() {
                         image={defaultBanner}
                     />
                     <PaddingSection>
-                        {isOwner && 
-                            <div>
-                                <button onClick={() => {setShowEdit(!showEdit)}}>Edit list</button>
-                            </div>
+                        {isOwner 
+                            ? <button onClick={() => {setShowEdit(!showEdit)}}>Edit list</button>
+                            : <button onClick={changeFollowing}>{isFollower ? "Unfollow" : "Follow"}</button>
                         }
                         {showEdit && 
                             <div>
@@ -166,6 +183,7 @@ function WatchListDetailsPage() {
                             <p>{`id: ${list.id}`}</p>
                             <p>{`name: ${list.name}`}</p>
                             <p>{`created by: ${list.owner.username}`}</p>
+                            <p>{`followers: ${list.followers.length}`}</p>
                             <p>{`participants: ${list.participants.length}`}</p>
                             <p>{`WatchItems: ${list.watchItems.length}`}</p>
                             <br/>
