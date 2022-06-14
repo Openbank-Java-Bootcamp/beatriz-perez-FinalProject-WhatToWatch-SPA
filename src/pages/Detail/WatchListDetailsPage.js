@@ -37,7 +37,6 @@ function WatchListDetailsPage() {
     }, [listId, editing]);
 
 
-
     const handleListName = (e) => setListName(e.target.value);
     const handleListDescription = (e) => setListDescription(e.target.value);
 
