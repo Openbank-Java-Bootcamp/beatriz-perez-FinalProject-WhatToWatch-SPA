@@ -1,5 +1,10 @@
-import './App.css';
+// Modules:
 import { Routes, Route } from "react-router-dom";
+
+// Styles:
+import './App.css';
+
+// Components:
 import IsPrivate from './components/authentication/IsPrivate';
 import IsAnon from './components/authentication/IsAnon';
 
@@ -17,6 +22,8 @@ import ExplorePage from './pages/ExplorePage';
 import SettingsPage from './pages/SettingsPage';
 
 import WatchItemPage from './pages/Detail/WatchItemPage';
+import UserDetailsPage from './pages/Detail/UserDetailsPage';
+import WatchListDetailsPage from "./pages/Detail/WatchListDetailsPage";
 
 
 
@@ -42,10 +49,9 @@ function App() {
         <Route path="/settings" element={<IsPrivate><SettingsPage /></IsPrivate>} />
 
         <Route path="/watchitem/:id" element={<IsPrivate><WatchItemPage /></IsPrivate>} />
+        <Route path="/users/:id" element={<IsPrivate><UserDetailsPage /></IsPrivate>} />
+        <Route path="/watchlists/:id" element={<IsPrivate><WatchListDetailsPage /></IsPrivate>} />
 
-        {/* 
-        --> user
-        */}
       </Routes>
     </div>
   );

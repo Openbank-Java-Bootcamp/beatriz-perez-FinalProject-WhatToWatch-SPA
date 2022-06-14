@@ -4,12 +4,12 @@ import { useContext, useState } from "react";
 import axios from "axios";
 
 // Styles:
-import styles from "./FindUserForm.module.scss";
+import styles from "./FindListForm.module.scss";
 
 // Components:
-import UsersList from "./UsersList";
+import ListsList from "./ListsList";
 
-function FindUserForm() {
+function FindListForm() {
     const {API_URL} = useContext(SourceContext);
     
     const [ searchText, setSearchText] = useState("");
@@ -30,7 +30,7 @@ function FindUserForm() {
             setSearchResults([]);
             axios
                 // Call external IMDb API
-                .get(API_URL+ "/api/users/search/"+ searchText)
+                .get(API_URL+ "/api/lists/name/"+ searchText)
                 // Save results in state variable
                 .then((response) => {
                     console.log(response.data);
@@ -51,7 +51,7 @@ function FindUserForm() {
 
     return (
         <>
-            <h2 className={styles.title}>Find other users</h2>
+            <h2 className={styles.title}>Find WatchLists</h2>
             <form className={styles.form} onSubmit={handleSubmit}>
                 <svg className={styles.form__icon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <circle cx="10" cy="10" r="7" />
@@ -59,7 +59,7 @@ function FindUserForm() {
                 </svg>
                 <input 
                     className={styles.form__input} 
-                    placeholder="Search by username or email"
+                    placeholder="Search by WatchList name"
                     type="text"
                     name="searchText"
                     value={searchText}
@@ -69,11 +69,11 @@ function FindUserForm() {
                 {searching && <p>loading...</p>}
             </form>
             {searchResults.length > 0 && 
-                <UsersList listTitle="Results for your search" usersList={searchResults} />
+                <ListsList listTitle="Results for your search" allLists={searchResults} />
             }
             {errorMessage !== "" && <p className={styles.messageText}>{errorMessage}</p>}
         </>
     );
 }
 
-export default FindUserForm;
+export default FindListForm;

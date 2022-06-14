@@ -1,7 +1,7 @@
 import styles from "./NewListForm.module.scss";
 import { useContext, useState } from "react";
-import { SourceContext } from "../../context/source.context";
-import { AuthContext } from "../../context/auth.context";
+import { SourceContext } from "../../../context/source.context";
+import { AuthContext } from "../../../context/auth.context";
 import axios from "axios";
 
 

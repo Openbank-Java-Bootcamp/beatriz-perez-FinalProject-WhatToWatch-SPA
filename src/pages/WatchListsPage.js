@@ -1,11 +1,16 @@
+// Modules:
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/auth.context";
 import { SourceContext } from "../context/source.context";
 import axios from "axios";
+
+// Components:
 import GeneralLayout from "../components/layout/GeneralLayout";
 import Banner from "../components/layout/Banner";
 import PaddingSection from "../components/layout/PaddingSection";
-import NewListForm from "../components/content/NewListForm";
+import NewListForm from "../components/content/list/NewListForm";
+import FindListForm from "../components/content/list/FindListForm";
+import ListsList from "../components/content/list/ListsList";
 
 function WatchListsPage() {
 
@@ -40,24 +45,23 @@ function WatchListsPage() {
                 <h2>Create a new WatchList</h2>
                 <NewListForm />
                 <h2>All lists:</h2>
-                {
-                    allLists.map(list => 
-                        <ul>
-                            <li key={list.id}>
-                                <p>
-                                    <strong>{list.name}</strong>
-                                    {`
-                                         - ${list.description}, 
-                                        participants: ${list.participants.length}, 
-                                        watchItems: ${list.watchItems.length} 
-                                    `}
-                                </p>
-                            </li>
-                        </ul>
-                    )
-                }
             </PaddingSection>
-        </ GeneralLayout>
+
+            <PaddingSection>
+              <FindListForm />
+            </PaddingSection>
+            <PaddingSection>
+              <ListsList 
+                  listTitle="All WatchLists" 
+                  allLists={allLists} 
+              />
+              <ListsList 
+                  listTitle="Newest WatchLists" 
+                  allLists={allLists} 
+              />
+            </PaddingSection>
+
+        </ GeneralLayout>      
     );
 }
 

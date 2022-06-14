@@ -1,5 +1,6 @@
 // Modules:
 import { SourceContext } from "../context/source.context";
+import { AuthContext } from "../context/auth.context";
 import { useContext, useState, useEffect } from "react";
 import axios from "axios";
 
@@ -12,6 +13,7 @@ import FindUserForm from "../components/content/user/FindUserForm";
 
 function UsersPage() {
   const {API_URL} = useContext(SourceContext);
+  const { user } = useContext(AuthContext);
   const [users, setUsers] = useState([]);
 
   const getAllUsers = () => {
@@ -25,8 +27,10 @@ function UsersPage() {
           headers: { Authorization: `Bearer ${storedToken}` },
         })
         .then((response) => {
-          setUsers(response.data)
-          console.log(response.data);
+          // Filter users to exclude logged in user (so I dont see myself on the list)
+          const allUsersButMe = response.data.filter(u => u.id !== user.id);
+          // Save list of users in state variable
+          setUsers(allUsersButMe);
         })
         .catch((error) => console.log(error));
   };
@@ -39,14 +43,15 @@ function UsersPage() {
 
   return (
     <GeneralLayout >
-        <Banner 
-            title="Users" 
-            text="Check out other user's watchlists"
-            image="https://images.pexels.com/photos/2774566/pexels-photo-2774566.jpeg"
-        />
-        <PaddingSection>
-          <FindUserForm />
-        </PaddingSection>
+      <Banner 
+          title="Users" 
+          text="Check out other user's watchlists"
+          image="https://images.pexels.com/photos/2774566/pexels-photo-2774566.jpeg"
+      />
+      <PaddingSection>
+        <FindUserForm />
+      </PaddingSection>
+      <PaddingSection>
         <UsersList 
             listTitle="Users you follow" 
             usersList={users} 
@@ -57,6 +62,7 @@ function UsersPage() {
             usersList={users} 
             orderFunction={(a,b) => new Date(b.joinDate) - new Date(a.joinDate)}
         />
+      </PaddingSection>
     </ GeneralLayout>
   );
 }

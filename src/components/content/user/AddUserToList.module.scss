@@ -1,0 +1,101 @@
+.wrapper {
+    position: absolute;
+    top: 10vh;
+    left: 10vw;
+    z-index: 20;
+    height: 80vh;
+    width: 80vw;
+    padding:20px;
+    border-radius: 30px;
+    box-shadow: 0 0 3px black;
+    background-color: rgb(181, 181, 181);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.button {
+    height: 2.8rem;
+    border: none;
+    outline: none;
+    border-radius: 14px;
+    padding: 0 10px;
+    width: 150px;
+    color: black;
+    font-weight: bold;
+    background-color: #d8d8d8;
+    &Small {
+        width: 80px;
+    }
+    &:hover {
+        color: white;
+        background-color: #959595;
+    }
+    &:active {
+        box-shadow: inset 0 0 3px black;
+    }
+}
+
+.addBox {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    &__column {
+        width:48%;
+        height: 100%;
+        padding:20px;
+        overflow-y: scroll;
+        .title{
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .warning{
+            font-size: 1.2rem;
+            margin-left: 5px;
+            margin-bottom: 15px;
+        }
+    }
+    &__listBox {
+        height: 50px;
+        width: 100%;
+        padding: 8px;
+        border-radius: 10px;
+        margin-bottom: 5px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        &:hover{
+            background-color: rgb(195, 195, 195);
+        }
+        .listName {
+            font-size: 1.4rem;
+        }
+        .listDescription{
+            font-size: 1.2rem;
+        }
+    }
+}
+.form{
+
+    &__input {
+        height: 2.8rem;
+        width: 100%;
+        border: none;
+        outline: none;
+        border-radius: 14px;
+        padding: 0 10px;
+        margin-bottom: 10px;
+        box-shadow: inset 0 0 3px black;
+    }
+}
+
+.messageText {
+    margin:10px;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
