@@ -5,6 +5,8 @@ import { SourceContext } from "../../context/source.context";
 import { AuthContext } from "../../context/auth.context";
 import axios from "axios";
 
+// Styles:
+import styles from "./WatchListDetailsPage.module.scss";
 // Images:
 import defaultBanner from "../../images/default-banner.jpg";
 
@@ -19,9 +21,13 @@ function WatchListDetailsPage() {
     const navigate = useNavigate();
     const { API_URL } = useContext(SourceContext);
     const { user } = useContext(AuthContext);
-    const [isOwner, setIsOwner] = useState(false);
     const { id:listId } = useParams();
+
+    const [isOwner, setIsOwner] = useState(false);
+    const [listName, setListName] = useState("")
+    const [listDescription, setListDescription] = useState("")
     const [list, setList] = useState(null)
+    const [showEdit, setShowEdit] = useState(false);
     const [editing, setEditing] = useState(false);
 
 
@@ -29,19 +35,44 @@ function WatchListDetailsPage() {
         getList();
     }, [listId, editing]);
 
+
+
+    const handleListName = (e) => setListName(e.target.value);
+    const handleListDescription = (e) => setListDescription(e.target.value);
+
     // Get User from WTW DB
     const getList = () => {
         const storedToken = localStorage.getItem("authToken");
         axios
             .get(`${API_URL}/api/lists/${listId}`, { headers: { Authorization: `Bearer ${storedToken}` }, })
             .then((response) => {
-                setList(response.data)
+                setList(response.data);
+                setListName(response.data.name);
+                setListDescription(response.data.description);
                 if(response.data.owner.id === user.id) setIsOwner(true)
                 else setIsOwner(false)
             })
             .catch((error) => console.log("ERROR MESSAGE: ", error.response.data.message));
     };
 
+    // Edit list details
+    const editListDetails = () => {
+        setEditing(true);
+        const storedToken = localStorage.getItem("authToken");
+        const editedList = {...list};
+        editedList.name = listName;
+        editedList.description = listDescription;
+        const requestBody = editedList;
+        axios
+            .put(`${API_URL}/api/lists/${listId}`, requestBody, {
+                headers: { Authorization: `Bearer ${storedToken}` },
+            })
+            .then((response) => {
+                console.log(response.data);
+                setEditing(false);
+            })
+            .catch((error) => console.log(error.response.data));
+    }
     // Remove user from participants
     const removeParticipant = (removedUserId) => {
         setEditing(true);
@@ -104,7 +135,33 @@ function WatchListDetailsPage() {
                         image={defaultBanner}
                     />
                     <PaddingSection>
-                        {isOwner && <button onClick={deleteList}>Delete list</button>}
+                        {isOwner && 
+                            <div>
+                                <button onClick={() => {setShowEdit(!showEdit)}}>Edit list</button>
+                            </div>
+                        }
+                        {showEdit && 
+                            <div>
+                                <button onClick={deleteList}>Delete list</button>
+                                <form className={styles.form} onSubmit={editListDetails}>                            
+                                    <input 
+                                        className={styles.form__input} 
+                                        type="text"
+                                        name="name"
+                                        value={listName}
+                                        onChange={handleListName}
+                                    />
+                                    <input 
+                                        className={styles.form__input} 
+                                        type="text"
+                                        name="description"
+                                        value={listDescription}
+                                        onChange={handleListDescription}
+                                    />
+                                    <button className={styles.form__button} type="submit">Update list</button>
+                                </form>
+                            </div>                          
+                        }
                         <div>
                             <p>{`id: ${list.id}`}</p>
                             <p>{`name: ${list.name}`}</p>
@@ -116,19 +173,23 @@ function WatchListDetailsPage() {
                             {list.watchItems.map(item =>
                                 <div key={item.id}>
                                     <p>{item.title}</p>
-                                    {isOwner && 
+                                    {showEdit && 
                                         <button onClick={() => {removeItem(item.id)}} type="button" >X</button>
                                     }
                                 </div>
                             )}
                             <h3>Participants</h3>
-                            {list.participants.map(user =>
-                                <div key={user.id}>
-                                    <p>{user.username}</p>
-                                    {isOwner && 
-                                        ( user.id !== list.owner.id  && 
-                                            <button onClick={() => {removeParticipant(user.id)}} type="button" >X</button>
+                            {list.participants.map(participant =>
+                                <div key={participant.id}>
+                                    <p>{participant.username}</p>
+                                    {showEdit && 
+                                        ( participant.id !== list.owner.id  && 
+                                            <button onClick={() => {removeParticipant(participant.id)}} type="button" >X</button>
                                         )
+                                    }
+                                    {
+                                        user.id === participant.id &&  user.id !== list.owner.id &&
+                                        <button onClick={() => {removeParticipant(participant.id)}} type="button" >X</button>
                                     }
                                 </div>
                             )}

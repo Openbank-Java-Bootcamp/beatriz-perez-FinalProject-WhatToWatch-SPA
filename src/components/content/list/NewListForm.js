@@ -6,7 +6,7 @@ import axios from "axios";
 
 
 
-function NewListForm({ handleCreated }) {
+function NewListForm({ editing, setEditing }) {
 
     const [ listName, setListName] = useState("");
     const [ listDescription, setListDescription] = useState("");
@@ -19,31 +19,35 @@ function NewListForm({ handleCreated }) {
 
     const handleNewListSubmit = (e) => {
       e.preventDefault();
-      // Build newListDTO object:
-      const requestBody = {
+      if(listName !== "" && listDescription !== "") {
+        setEditing(true);
+        // Build newListDTO object:
+        const requestBody = {
           name: listName,
           description: listDescription,
           ownerId: user.id,
-      };
-      // Get the token from the localStorage
-      const storedToken = localStorage.getItem("authToken");
-      // Send the token through the request "Authorization" Headers
-      axios
-        .post(`${API_URL}/api/lists/new`, requestBody, {
-          headers: { Authorization: `Bearer ${storedToken}` },
-        })
-        .then((response) => {
-          handleCreated(prevState => {return prevState.updates +1});
-          setListName("");
-          setListDescription("");
-          setErrorMessage("");
-        })
-        .catch((error) => {
-          console.log(error)
-          setErrorMessage(error.response.data.message);
-          setListName("");
-          setListDescription("");
-        });        
+        };
+        // Get the token from the localStorage
+        const storedToken = localStorage.getItem("authToken");
+        // Send the token through the request "Authorization" Headers
+        axios
+          .post(`${API_URL}/api/lists/new`, requestBody, {
+            headers: { Authorization: `Bearer ${storedToken}` },
+          })
+          .then((response) => {
+            setListName("");
+            setListDescription("");
+            setErrorMessage("");
+            setEditing(false);
+          })
+          .catch((error) => {
+            console.log(error)
+            setErrorMessage(error.response.data.message);
+            setListName("");
+            setListDescription("");
+            setEditing(false);
+          });        
+      }
     }
 
     return (

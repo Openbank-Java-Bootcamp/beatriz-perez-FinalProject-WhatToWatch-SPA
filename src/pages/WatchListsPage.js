@@ -18,7 +18,7 @@ function WatchListsPage() {
     const {API_URL} = useContext(SourceContext);
 
     const [allLists, setAllLists] = useState([]);
-    const [updates, setUpdates] = useState(0);
+    const [editing, setEditing] = useState(false);
 
     const getAllLists = () => {
         // Get the token from the localStorage
@@ -34,7 +34,7 @@ function WatchListsPage() {
     
     useEffect(() => {
         getAllLists();
-    }, [updates]);
+    }, [editing]);
 
     return (
         <GeneralLayout >
@@ -44,7 +44,7 @@ function WatchListsPage() {
                 image={null}
             />
             <PaddingSection>
-                <NewListForm handleCreated={setUpdates}/>
+                <NewListForm editing={editing} setEditing={setEditing}/>
             </PaddingSection>
             <PaddingSection>
               <FindListForm />
