@@ -36,8 +36,8 @@ function FindListForm() {
                     console.log(response.data);
                     setSearchResults(response.data);
                     // Reset form input
-                    setSearchText("")
-                    setErrorMessage("")
+                    setSearchText("");
+                    setErrorMessage("");
                     setSearching(false);
                 })
                 .catch((error) => {

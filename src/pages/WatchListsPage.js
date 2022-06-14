@@ -18,6 +18,8 @@ function WatchListsPage() {
     const {API_URL} = useContext(SourceContext);
 
     const [allLists, setAllLists] = useState([]);
+    const [updates, setUpdates] = useState(0);
+
     const getAllLists = () => {
         // Get the token from the localStorage
         const storedToken = localStorage.getItem("authToken");
@@ -32,7 +34,7 @@ function WatchListsPage() {
     
     useEffect(() => {
         getAllLists();
-    }, []);
+    }, [updates]);
 
     return (
         <GeneralLayout >
@@ -42,11 +44,8 @@ function WatchListsPage() {
                 image={null}
             />
             <PaddingSection>
-                <h2>Create a new WatchList</h2>
-                <NewListForm />
-                <h2>All lists:</h2>
+                <NewListForm handleCreated={setUpdates}/>
             </PaddingSection>
-
             <PaddingSection>
               <FindListForm />
             </PaddingSection>
