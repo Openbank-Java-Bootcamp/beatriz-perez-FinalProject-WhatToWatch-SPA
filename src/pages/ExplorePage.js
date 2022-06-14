@@ -1,9 +1,12 @@
+// Components;
 import GeneralLayout from "../components/layout/GeneralLayout";
 import Banner from "../components/layout/Banner";
 import PaddingSection from "../components/layout/PaddingSection";
 import Exploreform from "../components/content/explore/ExploreForm";
 import ExploreList from "../components/content/explore/ExploreList";
 
+// Images:
+import bannerImage from "../images/explore-image.jpg";
 
 
 function ExplorePage() {
@@ -13,7 +16,7 @@ function ExplorePage() {
             <Banner 
                 title="Want more?" 
                 text="Explore even more titles on IMDb and add them to your lists"
-                image="https://images.pexels.com/photos/2774566/pexels-photo-2774566.jpeg"
+                image={bannerImage}
             />
             <PaddingSection>
                 <Exploreform />
