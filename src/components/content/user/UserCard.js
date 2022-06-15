@@ -40,7 +40,6 @@ function UserCard({ user }) {
           />
           <h2 className={styles.username}>{user.username}</h2>
           <h2 className={styles.name}>{user.name}</h2>
-          <h2 className={styles.joinDate}>{"joined: " + user.joinDate}</h2>
           <div className={styles.infoBox}>
             <div className={styles.followersBox}>
               <svg
@@ -68,6 +67,7 @@ function UserCard({ user }) {
               <p className={styles.lists}>{lists.length}</p>
             </div>
           </div>
+          <h2 className={styles.joinDate}>{"joined: " + user.joinDate}</h2>
         </article>
       )}
     </>

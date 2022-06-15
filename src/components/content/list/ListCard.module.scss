@@ -1,27 +1,55 @@
+.collage {
+  width: 150px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  .collageImage {
+    width: 50%;
+    height: 75px;
+  }
+}
+
 .card {
   width: 150px;
   border-radius: 20px;
   overflow: hidden;
-  padding: 10px;
-  .username {
-    font-size: 2rem;
-    font-weight: normal;
+  .image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    object-position: center;
+    margin-bottom: 5px;
   }
+  .defaultIimage {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    object-position: center;
+    margin-bottom: 5px;
+    background-color: white;
+  }
+
   .name {
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid rgb(190, 190, 190);
+  }
+  .description {
     font-size: 1.2rem;
     font-weight: 500;
-    margin-bottom: 3px;
   }
-  .joinDate {
+  .creation {
     font-size: 1rem;
     font-weight: normal;
-    margin-bottom: -5px;
+    line-height: 1.5;
   }
   .infoBox {
+    margin-top: 7px;
     width: 100%;
-    line-height: 1;
-    height: 40px !important;
-    padding: 0;
+    padding: -5px 0;
     overflow: hidden;
     display: flex;
     flex-direction: row;
@@ -29,18 +57,18 @@
     align-items: center;
 
     .followersBox,
-    .listsBox {
-      width: 50%;
+    .participantsBox,
+    .seriesBox,
+    .moviesBox {
+      width: 49%;
+      height: 25px;
       display: flex;
       flex-direction: row;
       justify-content: center;
       align-items: center;
       gap: 10px;
     }
-    .followersBox {
-      border-right: 1px solid rgb(190, 190, 190);
-    }
-    .icon {
+    .iconFilled {
       width: 20px;
       height: 20px;
       stroke-width: 1.5px;
@@ -49,43 +77,29 @@
       stroke-linejoin: round;
       fill: white;
     }
-    .followers {
+    .icon {
+      width: 20px;
+      height: 20px;
+      stroke-width: 1.5px;
+      stroke: white;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+    .followers,
+    .participants,
+    .series,
+    .movies {
       font-size: 1.5rem;
       font-weight: bold;
     }
-    .lists {
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
   }
-  .image {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 50%;
+  .secondBox {
+    border-top: 1px solid rgb(69, 69, 69);
+    padding-top: 3px;
+    margin-bottom: 7px;
   }
-  .infoBox {
-    width: 100%;
-    height: 80px;
-    padding: 15px 5px 15px 5px;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
-    .titleBox {
-      .title {
-        max-width: 100px;
-        font-size: 1rem;
-        font-weight: 400;
-        margin-bottom: 5px;
-      }
-      .year {
-        font-size: 1rem;
-        font-weight: 200;
-      }
-    }
-  }
+
   &:hover {
     transform: scale(1.1);
     box-shadow: 0 0 13px 13px rgba(95, 95, 95, 0.5);
