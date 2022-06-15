@@ -11,59 +11,84 @@ import PaddingSection from "../components/layout/PaddingSection";
 import UsersList from "../components/content/user/UsersList";
 import FindUserForm from "../components/content/user/FindUserForm";
 
+// Images:
+import bannerImage from "../images/users-image.jpg";
+
 function UsersPage() {
-  const {API_URL} = useContext(SourceContext);
+  const { API_URL } = useContext(SourceContext);
   const { user } = useContext(AuthContext);
-  const [users, setUsers] = useState([]);
+  const [logedinUser, setLogedinUser] = useState(null);
+  const [users, setUsers] = useState(null);
 
-  const getAllUsers = () => {
-    console.log("inside get all users function");
-
-      // Get the token from the localStorage
-      const storedToken = localStorage.getItem("authToken");
-      // Send the token through the request "Authorization" Headers
-      axios
-        .get(`${API_URL}/api/users`, {
-          headers: { Authorization: `Bearer ${storedToken}` },
-        })
-        .then((response) => {
-          // Filter users to exclude logged in user (so I dont see myself on the list)
-          const allUsersButMe = response.data.filter(u => u.id !== user.id);
-          // Save list of users in state variable
-          setUsers(allUsersButMe);
-        })
-        .catch((error) => console.log(error));
-  };
-    
   useEffect(() => {
+    getUser();
     getAllUsers();
   }, []);
-    
-  console.log(users);
+
+  // Get Logedin User from WTW DB
+  const getUser = () => {
+    const storedToken = localStorage.getItem("authToken");
+    axios
+      .get(`${API_URL}/api/users/${user.id}`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
+      .then((response) => {
+        setLogedinUser(response.data);
+      })
+      .catch((error) =>
+        console.log("ERROR MESSAGE: ", error.response.data.message)
+      );
+  };
+
+  // Get All users but Logedin User from WTW DB
+  const getAllUsers = () => {
+    const storedToken = localStorage.getItem("authToken");
+    axios
+      .get(`${API_URL}/api/users`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
+      .then((response) => {
+        // Filter users to exclude logged in user (so I dont see myself on the list)
+        const allUsersButMe = response.data.filter((u) => u.id !== user.id);
+        // Save list of users in state variable
+        setUsers(allUsersButMe);
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
-    <GeneralLayout >
-      <Banner 
-          title="Users" 
-          text="Check out other user's watchlists"
-          image="https://images.pexels.com/photos/2774566/pexels-photo-2774566.jpeg"
-      />
+    <GeneralLayout>
+      <Banner title="Users" image={bannerImage} />
       <PaddingSection>
         <FindUserForm />
       </PaddingSection>
-      <PaddingSection>
-        <UsersList 
-            listTitle="Users you follow" 
-            usersList={users} 
-            orderFunction={(a,b) => new Date(b.joinDate) - new Date(a.joinDate)}
-        />
-        <UsersList 
-            listTitle="Newest users" 
-            usersList={users} 
-            orderFunction={(a,b) => new Date(b.joinDate) - new Date(a.joinDate)}
-        />
-      </PaddingSection>
-    </ GeneralLayout>
+      {users && (
+        <PaddingSection>
+          <UsersList
+            listTitle="10 Most popular users"
+            usersList={users
+              .sort((a, b) => b.followers.length - a.followers.length)
+              .slice(0, 10)}
+          />
+          <UsersList
+            listTitle="Users you follow"
+            usersList={users.filter((u) =>
+              u.followers.some((f) => f.id === user.id)
+            )}
+          />
+          <UsersList
+            listTitle="Users following you"
+            usersList={logedinUser.followers}
+          />
+          <UsersList
+            listTitle="10 Newest users"
+            usersList={users
+              .sort((a, b) => new Date(b.joinDate) - new Date(a.joinDate))
+              .slice(0, 10)}
+          />
+        </PaddingSection>
+      )}
+    </GeneralLayout>
   );
 }
 

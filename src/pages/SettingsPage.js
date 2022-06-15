@@ -1,17 +1,18 @@
+// Components:
 import GeneralLayout from "../components/layout/GeneralLayout";
 import Banner from "../components/layout/Banner";
+import SettingsForm from "../components/layout/SettingsForm";
 
+// Images:
+import bannerImage from "../images/settings-image.avif";
 
 function SettingsPage() {
-    return (
-        <GeneralLayout >
-        <Banner 
-            title="Settings" 
-            text="Settings page text"
-            image="https://images.pexels.com/photos/2774566/pexels-photo-2774566.jpeg"
-        />
-    </ GeneralLayout>
-    );
+  return (
+    <GeneralLayout>
+      <Banner title="Settings" image={bannerImage} />
+      <SettingsForm />
+    </GeneralLayout>
+  );
 }
 
 export default SettingsPage;

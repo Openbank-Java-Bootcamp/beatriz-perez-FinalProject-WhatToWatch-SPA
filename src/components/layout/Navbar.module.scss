@@ -1,84 +1,84 @@
 .navbar {
-    height:100vh;
-    width: 80px;
-    padding: 20px 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
+  height: 100vh;
+  width: 80px;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
 
-    button {
-        background-color: transparent;
-        border: none;
-        outline: none;
-        padding: 0;
-        cursor: pointer;
-    }
-    a {
-        text-decoration: none;
-        color: inherit;
-        cursor: pointer;
-    }
-    ul {
-        list-style-type: none;
-    }
-    .icon {
-        width:40px;
-        height:40px;
-        stroke-width: 1.5px;
-        stroke: #2c3e50;
-        fill: none;
-        stroke-linecap: round;
-        stroke-linejoin: round;
+  button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    cursor: pointer;
+  }
+  a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+  }
+  ul {
+    list-style-type: none;
+  }
+  .icon {
+    width: 40px;
+    height: 40px;
+    stroke-width: 1.5px;
+    stroke: #dfdfdf;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 
-        &:hover {
-            stroke: #647789;
-            transition: stroke 0.3s;
-        }
+    &:hover {
+      stroke: white;
+      transition: stroke 0.3s;
     }
-    .icon--growing {
-        &:hover {
-            width:45px;
-            height:45px;
-            transition: stroke 0.3s, width 0.3s, height 0.3s;
-        }
+  }
+  .icon--growing {
+    &:hover {
+      width: 48px;
+      height: 48px;
+      transition: stroke 0.3s, width 0.3s, height 0.3s;
     }
+  }
 }
 
 .user {
-    height: auto;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    &__image {
-        height: 40px;
-        width: 40px;
-        object-fit: cover;
-        object-position: center;
-        border: 3px solid #2c3e50;
-        border-radius: 50%;
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  &__image {
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    object-position: center;
+    border: 3px solid #dfdfdf;
+    border-radius: 50%;
+  }
+  &:hover {
+    .user__image {
+      border-color: white;
     }
-    &:hover {
-        .user__image {
-            border-color: #647789;
-        }
-    }
+  }
 }
 .navigation {
-    height: auto;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .settings {
-    height: auto;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
 }
