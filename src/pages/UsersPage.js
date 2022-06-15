@@ -71,18 +71,21 @@ function UsersPage() {
               .slice(0, 10)}
           />
           <UsersList
-            listTitle="Users you follow"
-            usersList={users.filter((u) =>
-              u.followers.some((f) => f.id === user.id)
-            )}
-          />
-          <UsersList
-            listTitle="Users following you"
-            usersList={logedinUser.followers}
-          />
-          <UsersList
             listTitle="10 Newest users"
             usersList={users
+              .sort((a, b) => new Date(b.joinDate) - new Date(a.joinDate))
+              .slice(0, 10)}
+          />
+          <UsersList
+            listTitle="10 Most popular users you follow"
+            usersList={users
+              .filter((u) => u.followers.some((f) => f.id === user.id))
+              .sort((a, b) => new Date(b.joinDate) - new Date(a.joinDate))
+              .slice(0, 10)}
+          />
+          <UsersList
+            listTitle="10 Most popular users following you"
+            usersList={logedinUser.followers
               .sort((a, b) => new Date(b.joinDate) - new Date(a.joinDate))
               .slice(0, 10)}
           />

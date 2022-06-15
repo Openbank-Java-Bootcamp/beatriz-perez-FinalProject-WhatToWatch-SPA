@@ -10,6 +10,7 @@ import Banner from "../components/layout/Banner";
 import PaddingSection from "../components/layout/PaddingSection";
 import WatchItemsList from "../components/content/WatchItemsList";
 import ListsList from "../components/content/list/ListsList";
+import NewListForm from "../components/content/list/NewListForm";
 
 function HomePage() {
   const { user } = useContext(AuthContext);
@@ -17,12 +18,13 @@ function HomePage() {
   const [logedinUser, setLogedinUser] = useState(null);
   const [allItems, setAllItems] = useState([]);
   const [userLists, setUserLists] = useState([]);
+  const [editing, setEditing] = useState(false);
 
   useEffect(() => {
     getUser();
     getUserLists();
     getAllItems();
-  }, []);
+  }, [editing]);
 
   // Get Logedin User from WTW DB
   const getUser = () => {
@@ -68,6 +70,9 @@ function HomePage() {
         text="Let's find something great to watch!"
         image="https://images.pexels.com/photos/2774566/pexels-photo-2774566.jpeg"
       />
+      <PaddingSection>
+        <NewListForm editing={editing} setEditing={setEditing} />
+      </PaddingSection>
       <PaddingSection>
         <ListsList listTitle="Your lists" allLists={userLists} />
         {allItems && (

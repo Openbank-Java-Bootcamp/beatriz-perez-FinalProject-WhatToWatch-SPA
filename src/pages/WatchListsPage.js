@@ -8,60 +8,63 @@ import axios from "axios";
 import GeneralLayout from "../components/layout/GeneralLayout";
 import Banner from "../components/layout/Banner";
 import PaddingSection from "../components/layout/PaddingSection";
-import NewListForm from "../components/content/list/NewListForm";
 import FindListForm from "../components/content/list/FindListForm";
 import ListsList from "../components/content/list/ListsList";
 
+// Images:
+import bannerImage from "../images/lists-image.jpg";
+
 function WatchListsPage() {
+  const { user } = useContext(AuthContext);
+  const { API_URL } = useContext(SourceContext);
+  const [allLists, setAllLists] = useState([]);
 
-    const { user } = useContext(AuthContext);
-    const {API_URL} = useContext(SourceContext);
+  useEffect(() => {
+    getAllLists();
+  }, []);
 
-    const [allLists, setAllLists] = useState([]);
-    const [editing, setEditing] = useState(false);
+  const getAllLists = () => {
+    // Get the token from the localStorage
+    const storedToken = localStorage.getItem("authToken");
+    // Send the token through the request "Authorization" Headers
+    axios
+      .get(`${API_URL}/api/lists`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
+      .then((response) => setAllLists(response.data))
+      .catch((error) => console.log(error));
+  };
 
-    const getAllLists = () => {
-        // Get the token from the localStorage
-        const storedToken = localStorage.getItem("authToken");
-        // Send the token through the request "Authorization" Headers
-        axios
-        .get(`${API_URL}/api/lists`, {
-            headers: { Authorization: `Bearer ${storedToken}` },
-        })
-        .then((response) => setAllLists(response.data))
-        .catch((error) => console.log(error));
-    };
-    
-    useEffect(() => {
-        getAllLists();
-    }, [editing]);
+  console.log(allLists);
 
-    return (
-        <GeneralLayout >
-            <Banner
-                title="WatchLists" 
-                text="WatchLists page text"
-                image={null}
-            />
-            <PaddingSection>
-                <NewListForm editing={editing} setEditing={setEditing}/>
-            </PaddingSection>
-            <PaddingSection>
-              <FindListForm />
-            </PaddingSection>
-            <PaddingSection>
-              <ListsList 
-                  listTitle="All WatchLists" 
-                  allLists={allLists} 
-              />
-              <ListsList 
-                  listTitle="Newest WatchLists" 
-                  allLists={allLists} 
-              />
-            </PaddingSection>
-
-        </ GeneralLayout>      
-    );
+  return (
+    <GeneralLayout>
+      <Banner title="WatchLists" image={bannerImage} />
+      <PaddingSection>
+        <FindListForm />
+      </PaddingSection>
+      <PaddingSection>
+        <ListsList
+          listTitle="Most popular WatchLists"
+          allLists={allLists
+            .sort((a, b) => b.followers.length - a.followers.length)
+            .slice(0, 10)}
+        />
+        <ListsList
+          listTitle="Most shared watchlists"
+          allLists={allLists
+            .sort((a, b) => b.participants.length - a.participants.length)
+            .slice(0, 10)}
+        />
+        <ListsList
+          listTitle="Newest watchlists"
+          allLists={allLists
+            .sort((a, b) => new Date(b.joinDate) - new Date(a.joinDate))
+            .slice(0, 10)}
+        />
+      </PaddingSection>
+    </GeneralLayout>
+  );
 }
 
 export default WatchListsPage;

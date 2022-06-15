@@ -1,57 +1,58 @@
 .title {
-    color: inherit;
+  color: inherit;
 }
 .form {
-    width: 100%;
-    height: auto;
-    margin-top: 20px;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 10px;
+  width: 100%;
+  height: auto;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
 
-    &__icon {
-        width: 2.5rem;
-        height: 2.5rem;
-        stroke-width: 1.5px;
-        stroke: #2c3e50;
-        fill: none;
-        stroke-linecap: round;
-        stroke-linejoin: round;
+  &__icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    stroke-width: 1.5px;
+    stroke: white;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  &__input,
+  &__button {
+    height: 2.8rem;
+    border: none;
+    outline: none;
+    padding: 0 10px;
+  }
+  &__input {
+    width: 195px;
+    box-shadow: inset 0 0 3px black;
+    &:first-of-type {
+      border-radius: 14px 0 0 14px;
     }
-    &__input, &__button {
-        height: 2.8rem;
-        border: none;
-        outline: none;
-        padding: 0 10px;
+    &:last-of-type {
+      border-radius: 0 14px 14px 0;
     }
-    &__input {
-        width: 195px;
-        box-shadow: inset 0 0 3px black;
-        &:first-of-type {
-            border-radius: 14px 0 0 14px;
-        }
-        &:last-of-type {
-            border-radius: 0 14px 14px 0;
-        }
+  }
+  &__button {
+    width: 150px;
+    color: black;
+    background-color: #d8d8d8;
+    border-radius: 14px;
+    &:hover {
+      color: white;
+      background-color: #959595;
     }
-    &__button {
-        width: 150px;
-        color: black;
-        background-color: #d8d8d8;
-        border-radius: 14px;
-        &:hover {
-            color: white;
-            background-color: #959595;
-        }
-        &:active {
-            box-shadow: inset 0 0 3px black;
-        }
+    &:active {
+      box-shadow: inset 0 0 3px black;
     }
+  }
 }
 .messageText {
-    margin:10px;
-    font-size: 1.4rem;
-    font-weight: bold;
+  margin: 10px;
+  font-size: 1.4rem;
+  font-weight: bold;
 }
