@@ -6,6 +6,8 @@
 html {
   /* rem size */
   font-size: 10px;
+  color: white;
+  background-color: black;
 }
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

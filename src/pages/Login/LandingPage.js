@@ -1,5 +1,6 @@
 // Modules:
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 // Styles:
 import styles from "./LandingPage.module.scss";
@@ -7,7 +8,6 @@ import 'animate.css';
 
 // Components:
 import AllCenteredLayout from "../../components/layout/AllCenteredLayout";
-import { useState } from "react";
 
 function LandingPage() {
 
