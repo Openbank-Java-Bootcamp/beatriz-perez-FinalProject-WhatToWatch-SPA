@@ -12,12 +12,16 @@
         overflow-y: scroll;
 
         &__title {
+            color: white;
+            font-family: 'Staatliches';
+            font-size: 3rem;
             position: absolute;
             top: 0;
             z-index: 10;
             height: 80px;
             width: 100%;
             display: grid;
-            place-items: center;        }
+            place-items: center;
+        }
     }
 }
