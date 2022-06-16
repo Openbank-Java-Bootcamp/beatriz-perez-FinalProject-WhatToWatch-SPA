@@ -23,6 +23,7 @@ function WatchListsPage() {
     getAllLists();
   }, []);
 
+  // Get all lists
   const getAllLists = () => {
     // Get the token from the localStorage
     const storedToken = localStorage.getItem("authToken");

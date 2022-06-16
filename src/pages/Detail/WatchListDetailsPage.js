@@ -147,8 +147,6 @@ function WatchListDetailsPage() {
       .catch((error) => console.log(error.response.data));
   };
 
-  console.log(list);
-
   return (
     <GeneralLayout>
       {list ? (
@@ -159,8 +157,16 @@ function WatchListDetailsPage() {
             image={defaultBanner}
           />
           <PaddingSection>
+            {/* description and owner ------------------------------------------------- */}
+            <p className={styles.description}>{list.description}</p>
+            <p className={styles.owner}>
+              {"created by "} <strong>{list.owner.username}</strong>
+              {` on ${list.creationDate}`}
+            </p>
+            {/* edit list ------------------------------------------------------------ */}
             {isOwner ? (
               <button
+                className={styles.button}
                 onClick={() => {
                   setShowEdit(!showEdit);
                 }}
@@ -168,18 +174,22 @@ function WatchListDetailsPage() {
                 Edit list
               </button>
             ) : (
-              <svg
-                onClick={changeFollowing}
-                className={!isFollower ? styles.icon : styles.iconFollowed}
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
-              </svg>
+              <div className={styles.followBox}>
+                <svg
+                  onClick={changeFollowing}
+                  className={!isFollower ? styles.icon : styles.iconFollowed}
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
+                </svg>
+                <p className={styles.followText}>
+                  {!isFollower ? "follow list" : "unfollow list"}
+                </p>
+              </div>
             )}
             {showEdit && (
               <div>
-                <button onClick={deleteList}>Delete list</button>
                 <form className={styles.form} onSubmit={editListDetails}>
                   <input
                     className={styles.form__input}
@@ -195,33 +205,69 @@ function WatchListDetailsPage() {
                     value={listDescription}
                     onChange={handleListDescription}
                   />
-                  <button className={styles.form__button} type="submit">
+                  <button className={styles.button} type="submit">
                     Update list
+                  </button>
+                  <button className={styles.button} onClick={deleteList}>
+                    Delete list
                   </button>
                 </form>
               </div>
             )}
-            <div>
-              <p>{`id: ${list.id}`}</p>
-              <p>{`name: ${list.name}`}</p>
-              <p>{`created by: ${list.owner.username}`}</p>
-              <p>{`followers: ${list.followers.length}`}</p>
-              <p>{`participants: ${list.participants.length}`}</p>
-              <p>{`WatchItems: ${list.watchItems.length}`}</p>
-              <br />
-              <h3>WatchItems</h3>
+
+            {/* showing info options ------------------------------------------------------------ */}
+            <div className={styles.optionsBox}>
+              <p className={styles.option}>
+                {"All WatchItems "}
+                <strong>{list.watchItems.length}</strong>
+              </p>
+              <p className={styles.option}>
+                {"Movies "}
+                <strong>
+                  {list.watchItems.filter((i) => i.type === "Movie").length}
+                </strong>
+              </p>
+              <p className={styles.option}>
+                {"Series "}
+                <strong>
+                  {list.watchItems.filter((i) => i.type === "TVSeries").length}
+                </strong>
+              </p>
+              <p className={styles.option}>
+                {"participants "} <strong>{list.participants.length}</strong>
+              </p>
+              <p className={styles.option}>
+                {"followers "} <strong>{list.followers.length}</strong>
+              </p>
+            </div>
+
+            {/* showing info  --------------------------------------------------------------------- */}
+
+            {/* items  --------------------------------------------------------------------- */}
+            <div className={styles.optionTable}>
+              <h3 className={styles.optionTitle}>WatchItems</h3>
               {list.watchItems.map((item) => (
-                <div key={item.id}>
-                  <p>{item.title}</p>
+                <div key={item.id} className={styles.itemRow}>
+                  <img
+                    className={styles.image}
+                    src={item.image}
+                    alt={`${item.title} poster`}
+                  />
+                  <p className={styles.title}>{item.title}</p>
+                  <p className={styles.title}>{item.year}</p>
+                  <p className={styles.title}>{item.type}</p>
                   {showEdit && (
-                    <button
+                    <svg
+                      className={styles.removeIcon}
                       onClick={() => {
                         removeItem(item.id);
                       }}
-                      type="button"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
                     >
-                      X
-                    </button>
+                      <circle cx="12" cy="12" r="9" />
+                      <line x1="9" y1="12" x2="15" y2="12" />
+                    </svg>
                   )}
                 </div>
               ))}

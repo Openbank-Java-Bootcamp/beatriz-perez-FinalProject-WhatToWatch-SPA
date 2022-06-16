@@ -10,6 +10,7 @@ function ListCard({ list }) {
     <div className={styles.collage}>
       {[...list.watchItems].slice(0, 4).map((i, index) => (
         <img
+          key={index}
           className={styles.collageImage}
           src={
             list.watchItems.length > 0

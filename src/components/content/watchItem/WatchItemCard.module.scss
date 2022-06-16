@@ -1,0 +1,101 @@
+.card {
+  position: relative;
+  width: 150px;
+  border-radius: 20px;
+  overflow: hidden;
+
+  .rank {
+    position: absolute;
+    z-index: 10;
+    top: 3px;
+    left: 6px;
+    color: rgb(255, 255, 255);
+    font-size: 3rem;
+    font-weight: bold;
+    text-shadow: 0px 0px 5px #c1c1c1;
+  }
+
+  .infoBox {
+    width: 100%;
+    height: 80px;
+    padding: 15px 5px 15px 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    .typeBox {
+      height: 55px;
+      width: 45px;
+      border-right: 1px solid rgb(190, 190, 190);
+      margin-right: 5px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      .typeText {
+        height: 30px;
+        font-size: 1rem;
+        font-weight: 200;
+        margin-bottom: 5px;
+      }
+      .icon {
+        width: 30px;
+        height: 30px;
+        stroke-width: 1px;
+        stroke: white;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        fill: none;
+      }
+    }
+    .titleBox {
+      height: 55px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      .title {
+        height: 24px;
+        max-width: 96px;
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 5px;
+        overflow: hidden;
+      }
+      .likesBox {
+        height: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 3px;
+
+        .iconFilled {
+          width: 20px;
+          height: 20px;
+          stroke-width: 1.5px;
+          stroke: white;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+          fill: none;
+        }
+        .likes {
+          font-size: 1.5rem;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+  &__image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 13px 13px rgba(95, 95, 95, 0.5);
+  }
+}

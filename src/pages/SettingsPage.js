@@ -4,7 +4,7 @@ import Banner from "../components/layout/Banner";
 import SettingsForm from "../components/layout/SettingsForm";
 
 // Images:
-import bannerImage from "../images/settings-image.avif";
+import bannerImage from "../images/settings-image.jpg";
 
 function SettingsPage() {
   return (

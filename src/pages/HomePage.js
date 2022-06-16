@@ -8,90 +8,86 @@ import axios from "axios";
 import GeneralLayout from "../components/layout/GeneralLayout";
 import Banner from "../components/layout/Banner";
 import PaddingSection from "../components/layout/PaddingSection";
-import WatchItemsList from "../components/content/WatchItemsList";
+import WatchItemsList from "../components/content/watchItem/WatchItemsList";
 import ListsList from "../components/content/list/ListsList";
 import NewListForm from "../components/content/list/NewListForm";
+
+// Images:
+import bannerImage from "../images/home-image.jpg";
+import UsersList from "../components/content/user/UsersList";
 
 function HomePage() {
   const { user } = useContext(AuthContext);
   const { API_URL } = useContext(SourceContext);
-  const [logedinUser, setLogedinUser] = useState(null);
-  const [allItems, setAllItems] = useState([]);
-  const [userLists, setUserLists] = useState([]);
+  const [allLists, setAllLists] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
   const [editing, setEditing] = useState(false);
 
   useEffect(() => {
-    getUser();
-    getUserLists();
-    getAllItems();
+    getAllLists();
+    getAllUsers();
   }, [editing]);
 
-  // Get Logedin User from WTW DB
-  const getUser = () => {
+  // Get all lists
+  const getAllLists = () => {
+    // Get the token from the localStorage
     const storedToken = localStorage.getItem("authToken");
+    // Send the token through the request "Authorization" Headers
     axios
-      .get(`${API_URL}/api/users/${user.id}`, {
+      .get(`${API_URL}/api/lists`, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
-      .then((response) => {
-        setLogedinUser(response.data);
-      })
-      .catch((error) =>
-        console.log("ERROR MESSAGE: ", error.response.data.message)
-      );
-  };
-  // Get all user's existing lists
-  const getUserLists = () => {
-    const storedToken = localStorage.getItem("authToken");
-    axios
-      .get(`${API_URL}/api/lists/owner/${user.id}`, {
-        headers: { Authorization: `Bearer ${storedToken}` },
-      })
-      .then((response) => setUserLists(response.data))
+      .then((response) => setAllLists(response.data))
       .catch((error) => console.log(error));
   };
-  // Get all existing items
-  const getAllItems = () => {
+  // Get All users but Logedin User from WTW DB
+  const getAllUsers = () => {
     const storedToken = localStorage.getItem("authToken");
     axios
-      .get(`${API_URL}/api/items`, {
+      .get(`${API_URL}/api/users`, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        setAllItems(response.data);
+        // Filter users to exclude logged in user (so I dont see myself on the list)
+        const allUsersButMe = response.data.filter((u) => u.id !== user.id);
+        // Save list of users in state variable
+        setAllUsers(allUsersButMe);
       })
       .catch((error) => console.log(error));
   };
 
   return (
     <GeneralLayout>
-      <Banner
-        title="Home"
-        text="Let's find something great to watch!"
-        image="https://images.pexels.com/photos/2774566/pexels-photo-2774566.jpeg"
-      />
+      <Banner title="Home" image={bannerImage} />
+
       <PaddingSection>
         <NewListForm editing={editing} setEditing={setEditing} />
       </PaddingSection>
-      <PaddingSection>
-        <ListsList listTitle="Your lists" allLists={userLists} />
-        {allItems && (
-          <WatchItemsList
-            listTitle="Movies and series you like"
-            list={allItems.filter((i) => i.likers.includes(logedinUser))}
-          />
-        )}
-        <WatchItemsList
-          listTitle="Movies and series on your lists you have not watched yet"
-          searchString=""
-        />
 
-        <ListsList listTitle="Lists you participate in" allLists={userLists} />
-        <ListsList listTitle="Lists you follow" allLists={userLists} />
-        <h2>Users you follow</h2>
-        <WatchItemsList
-          listTitle="Movies and series you like but have not watched yet"
-          searchString=""
+      <PaddingSection>
+        {/* --- Lists --------------------------------------------------------- */}
+        <ListsList
+          listTitle="Your lists"
+          allLists={allLists.filter((l) => l.owner.id === user.id)}
+        />
+        <ListsList
+          listTitle="Lists you participate in"
+          allLists={allLists
+            .filter((l) => l.participants.some((u) => u.id === user.id))
+            .filter((l) => l.owner.id !== user.id)}
+        />
+        <ListsList
+          listTitle="Lists you follow"
+          allLists={allLists.filter((l) =>
+            l.followers.some((u) => u.id === user.id)
+          )}
+        />
+        {/* --- Users --------------------------------------------------------- */}
+        <UsersList
+          listTitle="Users you follow"
+          usersList={allUsers.filter((u) =>
+            u.followers.some((f) => f.id === user.id)
+          )}
         />
       </PaddingSection>
     </GeneralLayout>

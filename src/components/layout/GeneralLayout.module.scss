@@ -1,27 +1,28 @@
 .page {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
 
-    .mainSection {
-        position: relative;
-        height: 100vh;
-        width: 100%;
-        overflow-x: hidden;
-        overflow-y: scroll;
+  .mainSection {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
 
-        &__title {
-            color: white;
-            font-family: 'Staatliches';
-            font-size: 3rem;
-            position: absolute;
-            top: 0;
-            z-index: 10;
-            height: 80px;
-            width: 100%;
-            display: grid;
-            place-items: center;
-        }
+    &__title {
+      color: white;
+      font-family: "Staatliches";
+      font-size: 3.5rem;
+      letter-spacing: 1px;
+      position: absolute;
+      top: 0;
+      z-index: 10;
+      height: 70px;
+      width: 100%;
+      display: grid;
+      place-items: center;
     }
+  }
 }

@@ -7,7 +7,7 @@ import axios from "axios";
 import GeneralLayout from "../components/layout/GeneralLayout";
 import Banner from "../components/layout/Banner";
 import PaddingSection from "../components/layout/PaddingSection";
-import WatchItemsList from "../components/content/WatchItemsList";
+import WatchItemsList from "../components/content/watchItem/WatchItemsList";
 
 // Images:
 import bannerImage from "../images/movies-image.jpg";
