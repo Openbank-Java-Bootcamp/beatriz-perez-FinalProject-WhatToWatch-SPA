@@ -3,10 +3,13 @@ import { useParams } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import { SourceContext } from "../../context/source.context";
 import { AuthContext } from "../../context/auth.context";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 // Styles:
 import styles from "./UserDetailsPage.module.scss";
+// Images:
+import defaultList from "../../images/default-list.png";
 
 // Components:
 import GeneralLayout from "../../components/layout/GeneralLayout";
@@ -78,6 +81,24 @@ function UserDetailsPage() {
       .catch((error) => console.log(error.response.data.message));
   };
 
+  // List image - collage
+  const collage = (l) => {
+    return (
+      <div className={styles.collage}>
+        {[...l.watchItems].slice(0, 4).map((i, index) => (
+          <img
+            key={index}
+            className={styles.collageImage}
+            src={
+              l.watchItems.length > 0 ? l.watchItems[index].image : defaultList
+            }
+            alt="user profile"
+          />
+        ))}
+      </div>
+    );
+  };
+
   console.log(user);
   return (
     <GeneralLayout>
@@ -125,21 +146,50 @@ function UserDetailsPage() {
               <div className={styles.listsBox}>
                 {lists &&
                   lists.map((l, index) => (
-                    <div key={index} className={styles.list}>
-                      <p className={styles.listName}>{l.name}</p>
-                      <img
-                        className={styles.listImage}
-                        src={l.image}
-                        alt={l.name}
-                      />
-                    </div>
+                    <Link
+                      key={l.id}
+                      to={`/watchlists/${l.id}`}
+                      className={styles.link}
+                    >
+                      <div className={styles.list}>
+                        {l.watchItems.length > 3 ? (
+                          collage(l)
+                        ) : (
+                          <img
+                            className={
+                              l.watchItems.length > 0
+                                ? styles.image
+                                : styles.defaultIimage
+                            }
+                            src={
+                              l.watchItems.length > 0
+                                ? l.watchItems[0].image
+                                : defaultList
+                            }
+                            alt="user profile"
+                          />
+                        )}
+                        <div className={styles.listInfo}>
+                          <p className={styles.listName}>{l.name}</p>
+                          <p className={styles.listDescription}>
+                            {l.description}
+                          </p>
+                          <p className={styles.listStats}>
+                            {"WatchItems: "}
+                            {l.watchItems.length}
+                            {", Followers: "}
+                            {l.followers.length}
+                          </p>
+                        </div>
+                      </div>
+                    </Link>
                   ))}
-                {/* --- Followers ---------------------------------------- */}
-                <p className={styles.infoTitle}>Followers</p>
-                <DetailsTable rows={user.followers} type="user" />
-                <br />
-                <br />
               </div>
+              {/* --- Followers ---------------------------------------- */}
+              <p className={styles.infoTitle}>Followers</p>
+              <DetailsTable rows={user.followers} type="user" />
+              <br />
+              <br />
             </div>
           </PaddingSection>
         </>

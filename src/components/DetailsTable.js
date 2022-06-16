@@ -78,17 +78,7 @@ function DetailsTable({ rows, type, showEdit, task, userId, isOwner }) {
             ))}
           {!isOwner &&
             (type === "item" ? (
-              <svg
-                className={styles.rowRemoveIcon}
-                onClick={() => {
-                  task(r.id);
-                }}
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-              >
-                <circle cx="12" cy="12" r="9" />
-                <line x1="9" y1="12" x2="15" y2="12" />
-              </svg>
+              <></>
             ) : r.id === userId ? (
               <svg
                 className={styles.rowRemoveIcon}
