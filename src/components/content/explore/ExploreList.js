@@ -72,7 +72,6 @@ function ExploreList({ listTitle, searchString, list }) {
       })
       .then((response) => {
         // If item exists on db navigate to details page
-        console.log(response.data);
         navigate(`/watchitem/${response.data.id}`);
       })
       .catch((error) => {
@@ -89,7 +88,6 @@ function ExploreList({ listTitle, searchString, list }) {
           )
           .then((response) => {
             // Then save details in WTW DB
-            console.log(response.data);
             console.log("Adding to WTW DB item: " + response.data.id);
             const item = response.data;
             const requestBody = {
@@ -115,7 +113,6 @@ function ExploreList({ listTitle, searchString, list }) {
               .post(`${API_URL}/api/items/new`, requestBody)
               .then((response) => {
                 // Then navigate to details page
-                console.log(response.data);
                 navigate(`/watchitem/${response.data.id}`);
               })
               .catch((error) => console.log(error));
@@ -126,13 +123,11 @@ function ExploreList({ listTitle, searchString, list }) {
       });
   };
 
-  console.log("ITEMS", listItems);
-
   return (
     <div className={styles.section}>
       <h2 className={styles.title}>
         {listTitle}
-        {!list && 
+        {!list && (
           <button onClick={updateListData}>
             <svg
               className={styles.icon}
@@ -142,8 +137,8 @@ function ExploreList({ listTitle, searchString, list }) {
               <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
               <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />
             </svg>
-        </button>
-      }
+          </button>
+        )}
       </h2>
       <ul className={styles.list}>
         {listItems.map((item) => (

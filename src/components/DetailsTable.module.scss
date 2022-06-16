@@ -1,0 +1,46 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
+
+  &Link {
+    text-decoration: none;
+    color: inherit;
+
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    .image {
+      height: 70px;
+    }
+    .textBox {
+      padding: 10px;
+      height: 70px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: flex-start;
+
+      .title {
+        font-size: 2rem;
+        font-weight: bold;
+      }
+    }
+  }
+
+  &RemoveIcon {
+    width: 30px;
+    height: 30px;
+    stroke-width: 1.5px;
+    stroke: white;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+    cursor: pointer;
+  }
+}

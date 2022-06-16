@@ -14,6 +14,7 @@ import defaultBanner from "../../images/default-banner.jpg";
 import GeneralLayout from "../../components/layout/GeneralLayout";
 import Banner from "../../components/layout/Banner";
 import PaddingSection from "../../components/layout/PaddingSection";
+import DetailsTable from "../../components/DetailsTable";
 
 function WatchListDetailsPage() {
   const navigate = useNavigate();
@@ -26,8 +27,11 @@ function WatchListDetailsPage() {
   const [listName, setListName] = useState("");
   const [listDescription, setListDescription] = useState("");
   const [list, setList] = useState(null);
+
   const [showEdit, setShowEdit] = useState(false);
   const [editing, setEditing] = useState(false);
+
+  const [showingOption, setShowingOption] = useState("WatchItems");
 
   useEffect(() => {
     getList();
@@ -35,6 +39,7 @@ function WatchListDetailsPage() {
 
   const handleListName = (e) => setListName(e.target.value);
   const handleListDescription = (e) => setListDescription(e.target.value);
+  const handleShowingOption = (e) => setShowingOption(e.target.value);
 
   // Get User from WTW DB
   const getList = () => {
@@ -217,86 +222,101 @@ function WatchListDetailsPage() {
 
             {/* showing info options ------------------------------------------------------------ */}
             <div className={styles.optionsBox}>
-              <p className={styles.option}>
+              <button
+                value="WatchItems"
+                onClick={handleShowingOption}
+                type="button"
+                className={styles.option}
+              >
                 {"All WatchItems "}
                 <strong>{list.watchItems.length}</strong>
-              </p>
-              <p className={styles.option}>
+              </button>
+              <button
+                value="Movies"
+                onClick={handleShowingOption}
+                type="button"
+                className={styles.option}
+              >
                 {"Movies "}
                 <strong>
                   {list.watchItems.filter((i) => i.type === "Movie").length}
                 </strong>
-              </p>
-              <p className={styles.option}>
+              </button>
+              <button
+                value="Series"
+                onClick={handleShowingOption}
+                type="button"
+                className={styles.option}
+              >
                 {"Series "}
                 <strong>
                   {list.watchItems.filter((i) => i.type === "TVSeries").length}
                 </strong>
-              </p>
-              <p className={styles.option}>
+              </button>
+              <button
+                value="Participants"
+                onClick={handleShowingOption}
+                type="button"
+                className={styles.option}
+              >
                 {"participants "} <strong>{list.participants.length}</strong>
-              </p>
-              <p className={styles.option}>
+              </button>
+              <button
+                value="Followers"
+                onClick={handleShowingOption}
+                type="button"
+                className={styles.option}
+              >
                 {"followers "} <strong>{list.followers.length}</strong>
-              </p>
+              </button>
             </div>
 
             {/* showing info  --------------------------------------------------------------------- */}
-
-            {/* items  --------------------------------------------------------------------- */}
             <div className={styles.optionTable}>
-              <h3 className={styles.optionTitle}>WatchItems</h3>
-              {list.watchItems.map((item) => (
-                <div key={item.id} className={styles.itemRow}>
-                  <img
-                    className={styles.image}
-                    src={item.image}
-                    alt={`${item.title} poster`}
-                  />
-                  <p className={styles.title}>{item.title}</p>
-                  <p className={styles.title}>{item.year}</p>
-                  <p className={styles.title}>{item.type}</p>
-                  {showEdit && (
-                    <svg
-                      className={styles.removeIcon}
-                      onClick={() => {
-                        removeItem(item.id);
-                      }}
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle cx="12" cy="12" r="9" />
-                      <line x1="9" y1="12" x2="15" y2="12" />
-                    </svg>
-                  )}
-                </div>
-              ))}
-              <h3>Participants</h3>
-              {list.participants.map((participant) => (
-                <div key={participant.id}>
-                  <p>{participant.username}</p>
-                  {showEdit && participant.id !== list.owner.id && (
-                    <button
-                      onClick={() => {
-                        removeParticipant(participant.id);
-                      }}
-                      type="button"
-                    >
-                      X
-                    </button>
-                  )}
-                  {user.id === participant.id && user.id !== list.owner.id && (
-                    <button
-                      onClick={() => {
-                        removeParticipant(participant.id);
-                      }}
-                      type="button"
-                    >
-                      X
-                    </button>
-                  )}
-                </div>
-              ))}
+              <h3 className={styles.optionTitle}>{showingOption}</h3>
+              {showingOption === "WatchItems" && (
+                <DetailsTable
+                  rows={list.watchItems}
+                  type="item"
+                  showEdit={showEdit}
+                  task={removeItem}
+                  userId={user.id}
+                  isOwner={isOwner}
+                />
+              )}
+              {showingOption === "Movies" && (
+                <DetailsTable
+                  rows={list.watchItems.filter((i) => i.type === "Movie")}
+                  type="item"
+                  showEdit={showEdit}
+                  task={removeItem}
+                  userId={user.id}
+                  isOwner={isOwner}
+                />
+              )}
+              {showingOption === "Series" && (
+                <DetailsTable
+                  rows={list.watchItems.filter((i) => i.type === "TVSeries")}
+                  type="item"
+                  showEdit={showEdit}
+                  task={removeItem}
+                  userId={user.id}
+                  isOwner={isOwner}
+                />
+              )}
+              {showingOption === "Participants" && (
+                <DetailsTable
+                  rows={list.participants}
+                  type="user"
+                  showEdit={showEdit}
+                  task={removeParticipant}
+                  userId={user.id}
+                  isOwner={isOwner}
+                />
+              )}
+              {showingOption === "Followers" && (
+                <DetailsTable rows={list.followers} type="user" />
+              )}
             </div>
           </PaddingSection>
         </>
