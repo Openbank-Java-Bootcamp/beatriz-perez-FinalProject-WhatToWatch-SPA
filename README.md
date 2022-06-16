@@ -53,8 +53,8 @@ The WhatToWatch application has several types of components:
 
 ## 7. Future Work
 
-An interestin feature to implement in the future could be keeping track of watched episodes in series.
-Rating watchItems and adding comments (spoilers aside) would be great too. And being able to navigate to items whit the same actors or directors.
+An interesting feature to implement in the future could be keeping track of watched episodes in series.
+Rating watchItems and adding comments (spoilers aside) would be great too. And being able to navigate to items with the same actors or directors.
 
 ## 8. Resources
 
