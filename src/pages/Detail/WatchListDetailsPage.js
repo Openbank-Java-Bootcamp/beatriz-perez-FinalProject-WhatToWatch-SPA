@@ -146,7 +146,7 @@ function WatchListDetailsPage() {
       .delete(`${API_URL}/api/lists/${listId}`, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
-      .then(() => {
+      .then((response) => {
         navigate(-1);
       })
       .catch((error) => console.log(error.response.data));

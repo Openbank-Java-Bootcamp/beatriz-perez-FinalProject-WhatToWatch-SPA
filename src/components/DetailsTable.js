@@ -8,7 +8,6 @@ import styles from "./DetailsTable.module.scss";
 import defaultUser from "../images/default-user-image.png";
 
 function DetailsTable({ rows, type, showEdit, task, userId, isOwner }) {
-  console.log("ROWS ", rows);
   return (
     <>
       {rows.map((r) => (
