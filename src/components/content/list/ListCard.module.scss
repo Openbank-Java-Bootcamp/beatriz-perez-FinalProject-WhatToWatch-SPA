@@ -1,8 +1,11 @@
 .collage {
   width: 150px;
+  height: 150px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  margin-bottom: 5px;
+
   .collageImage {
     width: 50%;
     height: 75px;
