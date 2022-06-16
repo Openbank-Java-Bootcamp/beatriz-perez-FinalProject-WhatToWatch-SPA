@@ -1,0 +1,24 @@
+.settings {
+  width: 100%;
+  .title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  .optionList {
+    list-style-type: none;
+  }
+  .option {
+    width: 500px;
+    height: 40px;
+    margin-left: 30px;
+    border: 1px solid rgb(160, 160, 160);
+    border-radius: 10px;
+    margin-bottom: 15px;
+    display: grid;
+    place-items: center;
+    &:hover {
+      border: 2px solid rgb(221, 221, 221);
+    }
+  }
+}

@@ -104,9 +104,6 @@ function ListCard({ list }) {
       <p className={styles.creation}>
         Created by <strong>{list.owner.username}</strong>
       </p>
-      <p>
-        on <strong>{list.creationDate}</strong>
-      </p>
     </article>
   );
 }

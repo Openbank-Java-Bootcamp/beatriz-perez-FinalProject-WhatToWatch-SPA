@@ -57,9 +57,10 @@ function WatchListDetailsPage() {
           response.data.followers.filter((i) => i.id === user.id).length > 0
         );
       })
-      .catch((error) =>
-        console.log("ERROR MESSAGE: ", error.response.data.message)
-      );
+      .catch((error) => {
+        console.log("ERROR MESSAGE: ", error.response.data.message);
+        navigate("/home");
+      });
   };
 
   // Follow or unfollow list
@@ -147,7 +148,7 @@ function WatchListDetailsPage() {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        navigate(-1);
+        navigate("/home");
       })
       .catch((error) => console.log(error.response.data));
   };
