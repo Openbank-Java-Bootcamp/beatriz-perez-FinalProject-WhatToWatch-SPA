@@ -3,6 +3,7 @@
 A Single Page Application developed by [Beatriz Perez](https://github.com/beatriz-perez) using React.
 
 - Trello board: [join WTW trello board](https://trello.com/invite/b/6vu1AH4D/6b9ddcb9b22acd1688b9fc1ebf9efcc7/whattowatch-final-project)
+- Presetation: [slides](https://prezi.com/view/W2P8p1bzWLVGQ1dabvAl/)
 
 ## SPA documentation
 
@@ -46,7 +47,9 @@ The WhatToWatch application has several types of components:
 - Content components: details, lists and cards to show information.
 - Authentication: wrapper components to share authentication information throgout the app avoiding props drilling.
 
-## 6. Demo(Optional) (Screenshots or GIFs of the application)
+## 6. Demo
+
+![Demo](./src/images/demo.gif)
 
 ## 7. Future Work
 

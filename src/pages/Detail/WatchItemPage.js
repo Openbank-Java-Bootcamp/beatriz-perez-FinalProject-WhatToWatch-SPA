@@ -154,7 +154,14 @@ function WatchItemPage() {
                 </p>
               </div>
               <p className={styles.infoTitle}>Trailer</p>
-              <a className={styles.infoText}>{item.trailer}</a>
+              <a
+                className={styles.infoText}
+                href={item.trailer}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                watch on IMDb
+              </a>
 
               <p className={styles.infoTitle}>Synopsis</p>
               <p className={styles.infoText}>{item.synopsis}</p>

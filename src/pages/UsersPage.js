@@ -80,13 +80,13 @@ function UsersPage() {
             listTitle="10 Most popular users you follow"
             usersList={users
               .filter((u) => u.followers.some((f) => f.id === user.id))
-              .sort((a, b) => new Date(b.joinDate) - new Date(a.joinDate))
+              .sort((a, b) => b.followers.length - a.followers.length)
               .slice(0, 10)}
           />
           <UsersList
             listTitle="10 Most popular users following you"
             usersList={logedinUser.followers
-              .sort((a, b) => new Date(b.joinDate) - new Date(a.joinDate))
+              .sort((a, b) => b.followers.length - a.followers.length)
               .slice(0, 10)}
           />
         </PaddingSection>

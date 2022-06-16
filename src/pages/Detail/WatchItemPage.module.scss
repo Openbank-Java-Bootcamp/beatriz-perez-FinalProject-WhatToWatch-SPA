@@ -59,6 +59,20 @@
     font-size: 1.2rem;
     font-weight: 400;
   }
+  a {
+    display: inline-block;
+    width: 150px;
+    height: 30px;
+    border-radius: 15px;
+    line-height: 30px;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid white;
+    &:hover {
+      color: rgb(163, 163, 163);
+    }
+  }
 }
 .actors {
   display: flex;
